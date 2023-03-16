@@ -2,6 +2,7 @@ package com.portfolio.proiv.Controllers;
 
 import com.portfolio.proiv.Models.Questions;
 import com.portfolio.proiv.Services.QuestionsServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class QuestionsController {
     @CrossOrigin
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Questions> createQuestion(@RequestBody Questions question){
+    public ResponseEntity<Questions> createQuestion(@Valid @RequestBody Questions question){
         return new ResponseEntity<>(questionsServices.createQuestion(question), HttpStatus.CREATED);
     }
 
@@ -40,6 +41,4 @@ public class QuestionsController {
         questionsServices.deleteQuestion(id);
         return new ResponseEntity<>("Question deleted successfully",HttpStatus.OK);
     }
-
-
 }
